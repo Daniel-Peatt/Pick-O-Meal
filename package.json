@@ -1,0 +1,16 @@
+{
+  "name": "meal-decider",
+  "version": "1.0.0",
+  "description": "Website to help you decide what to cook",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Peatt",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.0"
+  }
+}
