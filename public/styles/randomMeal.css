@@ -1,0 +1,81 @@
+
+.mealName{
+    background-color: #FCCD2A;
+}
+
+.mealInfo{
+    background-color: #FFFBE6;
+}
+
+.instruction{
+    background-color: #FFFBE6;
+}
+
+.rCol{
+    background-color: #FFFBE6;
+}
+
+.measurements{
+    background-color: #FFFBE6;
+}
+
+ul{
+    list-style-type: none;
+}
+
+/* Increase the sive of the Youtube video player */
+.embed-responsive-item {
+    width: 100%; /* Full width */
+    height: 500px; /* Custom height */
+}
+
+.meal-img{
+    /* Sets the max width of the image so it doesn't get too big */
+    max-width: 50rem;
+    height: auto;
+}
+
+/* Animated Background */
+html {
+    height:100%;
+  }
+  
+  body {
+    margin:0;
+  }
+  
+  .bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #C0EBA6 50%, #FCCD2A 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+  
+  .bg3 {
+    animation-duration:5s;
+  }
+  
+
+  
+  h1 {
+    font-family:monospace;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
+    }
+  }
