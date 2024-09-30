@@ -15,8 +15,33 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/generateMeal", async (req, res) => {
     try {
-        const result = await axios.get("https://www.themealdb.com/api/json/v1/1/random.php");
-        console.log(result.data);
+        
+        // Saving the mealType selected to a variable
+        const mealType = req.query.mealType;
+
+        if (mealType != "Breakfast" || mealType != "Dessert")
+        {
+            console.log("Please select a category.");
+        }
+
+        // Getting meal list by category
+        const resultCategory = await axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType);
+        
+        // Generate a random number for random meal selection
+        const randomMealNumber = Math.floor(Math.random() * (resultCategory.data.meals.length + 1));
+
+        // Getting meal id based off the randomMealNumber
+        const mealId = resultCategory.data.meals[randomMealNumber].idMeal;
+        
+        // console.log(resultCategory.data);
+        // console.log("Category Length: " + resultCategory.data.meals.length); 
+        // console.log("Random number: " + randomMealNumber); 
+        // console.log("MealId: " + mealId);
+
+        // Using the random mealId to retrieve meal based of category.
+        const result = await axios.get("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId); 
+
+        // Logic for loading randomMeal.ejs
 
         // Saving list of ingredients dynamically
         let i = 1;
@@ -28,7 +53,6 @@ app.get("/generateMeal", async (req, res) => {
             i++;
             checkIng = result.data.meals[0]["strIngredient" + i];
         }
-        console.log(checkArrIng);
 
         // Saving list of measurments dynamically
         let m = 1;
@@ -41,17 +65,17 @@ app.get("/generateMeal", async (req, res) => {
             check = result.data.meals[0]["strMeasure" + m];
             
         }
-        console.log(checkArr);
 
         // Splitting up instructions by new line
         const instructionsArray = result.data.meals[0]["strInstructions"].split(/\r?\n|\r/);
-        console.log(instructionsArray);
 
+        // Reformats the URL to play with iframe
         let youTubeLink = result.data.meals[0].strYoutube;
         if (youTubeLink.includes('watch?v=')) {
             youTubeLink = youTubeLink.replace('watch?v=', 'embed/');
         }
 
+        // Loading webpage
         res.render("randomMeal.ejs", {
             meals : result.data.meals[0], 
             ingredients: checkArrIng,
