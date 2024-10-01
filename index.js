@@ -19,11 +19,6 @@ app.get("/generateMeal", async (req, res) => {
         // Saving the mealType selected to a variable
         const mealType = req.query.mealType;
 
-        if (mealType != "Breakfast" || mealType != "Dessert")
-        {
-            console.log("Please select a category.");
-        }
-
         // Getting meal list by category
         const resultCategory = await axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + mealType);
         
@@ -32,11 +27,6 @@ app.get("/generateMeal", async (req, res) => {
 
         // Getting meal id based off the randomMealNumber
         const mealId = resultCategory.data.meals[randomMealNumber].idMeal;
-        
-        // console.log(resultCategory.data);
-        // console.log("Category Length: " + resultCategory.data.meals.length); 
-        // console.log("Random number: " + randomMealNumber); 
-        // console.log("MealId: " + mealId);
 
         // Using the random mealId to retrieve meal based of category.
         const result = await axios.get("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId); 
